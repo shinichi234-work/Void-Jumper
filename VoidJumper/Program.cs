@@ -1,3 +1,3 @@
-﻿using VoidJumper.Core;
+using VoidJumper.Core;
 
-new Game().Run();
+GameManager.Instance.Run();
