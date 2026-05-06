@@ -1,1 +1,3 @@
-﻿Console.WriteLine("Hello, World!");
+﻿using VoidJumper.Core;
+
+new Game().Run();
