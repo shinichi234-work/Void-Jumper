@@ -1,3 +1,5 @@
+using VoidJumper.Systems;
+
 namespace VoidJumper.Core;
 
 public class GameManager
@@ -28,6 +30,10 @@ public class GameManager
     public void Run()
     {
         Console.WriteLine($"Game started. Difficulty: {Difficulty}");
+
+        IWeapon weapon = new SharpDecorator(new FireDecorator(new BaseSword(), 5), 3);
+        Console.WriteLine($"Player weapon: {weapon.GetDescription()} ({weapon.GetDamage()} dmg)");
+
         new Game().Run();
     }
 }
