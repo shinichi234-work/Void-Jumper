@@ -29,6 +29,9 @@ public class Game
 
     public void Run()
     {
+        var battle = new BattleFacade();
+        battle.StartBattle(player);
+
         bool running = true;
         while (running)
         {
