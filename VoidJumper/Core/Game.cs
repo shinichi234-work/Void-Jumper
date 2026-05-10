@@ -4,27 +4,37 @@ namespace VoidJumper.Core;
 
 public class Game
 {
+    private const int DefaultEnemyCount = 2;
+
     private Level level;
     private Player player;
     private List<Enemy> enemies;
 
     public Game()
     {
-        var gm = GameManager.Instance;
+        level = BuildLevel();
+        player = new Player();
+        enemies = SpawnEnemies();
+    }
 
-        level = new LevelBuilder()
+    private Level BuildLevel()
+    {
+        var gm = GameManager.Instance;
+        return new LevelBuilder()
             .SetName("Level 1")
             .SetSize(gm.MapWidth, gm.MapHeight)
-            .SetEnemyCount(2)
+            .SetEnemyCount(DefaultEnemyCount)
             .SetHasBoss(false)
             .Build();
+    }
 
-        player = new Player();
-
+    private List<Enemy> SpawnEnemies()
+    {
         EnemyFactory[] factories = { new PatrolEnemyFactory(), new JumpEnemyFactory() };
-        enemies = new List<Enemy>();
+        var list = new List<Enemy>();
         foreach (var factory in factories)
-            enemies.Add(factory.CreateEnemy());
+            list.Add(factory.CreateEnemy());
+        return list;
     }
 
     public void Run()
