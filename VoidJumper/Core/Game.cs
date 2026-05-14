@@ -1,4 +1,5 @@
 using VoidJumper.Entities;
+using VoidJumper.Systems;
 
 namespace VoidJumper.Core;
 
@@ -9,12 +10,14 @@ public class Game
     private Level level;
     private Player player;
     private List<Enemy> enemies;
+    private ConsoleHUD hud;
 
     public Game()
     {
         level = BuildLevel();
         player = new Player();
         enemies = SpawnEnemies();
+        hud = new ConsoleHUD(player);
     }
 
     private Level BuildLevel()
@@ -52,12 +55,17 @@ public class Game
             if (key == ConsoleKey.Escape)
                 running = false;
         }
+
+        hud.Unsubscribe();
     }
 
     private void Update()
     {
         foreach (var enemy in enemies)
+        {
             enemy.ExecuteStrategy();
+            player.TakeDamage(enemy.Damage);
+        }
     }
 
     private void Draw()
