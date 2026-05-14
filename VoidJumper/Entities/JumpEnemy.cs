@@ -9,6 +9,7 @@ public class JumpEnemy : Enemy
     {
         Name = "Jumper";
         Health = InitialHealth;
+        MaxHealth = InitialHealth;
         Damage = InitialDamage;
     }
 

@@ -57,7 +57,7 @@ public class Game
     private void Update()
     {
         foreach (var enemy in enemies)
-            enemy.Attack();
+            enemy.ExecuteStrategy();
     }
 
     private void Draw()
