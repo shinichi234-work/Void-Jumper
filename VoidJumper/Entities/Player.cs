@@ -6,9 +6,20 @@ public class Player : Entity
 
     public int Score { get; set; }
 
+    public event Action<int> OnHealthChanged;
+
     public Player()
     {
         Name = "Player";
         Health = InitialHealth;
+        MaxHealth = InitialHealth;
+    }
+
+    public override void TakeDamage(int amount)
+    {
+        int before = Health;
+        base.TakeDamage(amount);
+        if (Health != before)
+            OnHealthChanged?.Invoke(Health);
     }
 }

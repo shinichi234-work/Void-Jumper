@@ -6,7 +6,7 @@ public class Entity
     public int Health { get; set; }
     public int MaxHealth { get; set; }
 
-    public void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         Health -= amount;
         if (Health < 0)
