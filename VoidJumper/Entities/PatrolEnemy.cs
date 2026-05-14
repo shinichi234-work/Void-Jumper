@@ -9,6 +9,7 @@ public class PatrolEnemy : Enemy
     {
         Name = "Patrol";
         Health = InitialHealth;
+        MaxHealth = InitialHealth;
         Damage = InitialDamage;
     }
 
