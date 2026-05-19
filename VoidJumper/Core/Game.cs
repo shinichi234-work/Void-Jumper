@@ -1,4 +1,5 @@
 using VoidJumper.Entities;
+using VoidJumper.States;
 using VoidJumper.Systems;
 
 namespace VoidJumper.Core;
@@ -7,17 +8,23 @@ public class Game
 {
     private const int DefaultEnemyCount = 2;
 
-    private Level level;
-    private Player player;
-    private List<Enemy> enemies;
-    private ConsoleHUD hud;
+    private readonly Level _level;
+    private readonly Player _player;
+    private readonly List<Enemy> _enemies;
+    private readonly ConsoleHUD _hud;
+    private GameState _currentState;
+
+    public Level Level => _level;
+    public Player Player => _player;
+    public List<Enemy> Enemies => _enemies;
+    public GameState CurrentState => _currentState;
 
     public Game()
     {
-        level = BuildLevel();
-        player = new Player();
-        enemies = SpawnEnemies();
-        hud = new ConsoleHUD(player);
+        _level = BuildLevel();
+        _player = new Player();
+        _enemies = SpawnEnemies();
+        _hud = new ConsoleHUD(_player);
     }
 
     private Level BuildLevel()
@@ -40,42 +47,24 @@ public class Game
         return list;
     }
 
+    public void ChangeState(GameState state)
+    {
+        _currentState = state;
+        _currentState?.Enter(this);
+    }
+
     public void Run()
     {
-        var battle = new BattleFacade();
-        battle.StartBattle(player);
+        ChangeState(new MenuState());
 
-        bool running = true;
-        while (running)
+        while (_currentState != null)
         {
-            Update();
-            Draw();
-
+            _currentState.Draw(this);
             var key = Console.ReadKey(true).Key;
-            if (key == ConsoleKey.Escape)
-                running = false;
+            _currentState.HandleInput(this, key);
+            _currentState?.Update(this);
         }
 
-        hud.Unsubscribe();
-    }
-
-    private void Update()
-    {
-        foreach (var enemy in enemies)
-        {
-            enemy.ExecuteStrategy();
-            player.TakeDamage(enemy.Damage);
-        }
-    }
-
-    private void Draw()
-    {
-        Console.Clear();
-        Console.WriteLine("=== Void Jumper ===");
-        Console.WriteLine($"Level: {level.Name}  ({level.Width}x{level.Height})");
-        Console.WriteLine($"Enemies: {level.EnemyCount}  Boss: {level.HasBoss}");
-        Console.WriteLine($"Player: {player.Name}  HP: {player.Health}  Score: {player.Score}");
-        Console.WriteLine($"Enemies on level: {enemies.Count}");
-        Console.WriteLine("\nPress Esc to exit");
+        _hud.Unsubscribe();
     }
 }
