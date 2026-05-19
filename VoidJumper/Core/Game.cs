@@ -12,12 +12,14 @@ public class Game
     private readonly Player _player;
     private readonly List<Enemy> _enemies;
     private readonly ConsoleHUD _hud;
+    private readonly InputManager _inputManager;
     private GameState _currentState;
 
     public Level Level => _level;
     public Player Player => _player;
     public List<Enemy> Enemies => _enemies;
     public GameState CurrentState => _currentState;
+    public InputManager InputManager => _inputManager;
 
     public Game()
     {
@@ -25,6 +27,7 @@ public class Game
         _player = new Player();
         _enemies = SpawnEnemies();
         _hud = new ConsoleHUD(_player);
+        _inputManager = BuildInputManager();
     }
 
     private Level BuildLevel()
@@ -45,6 +48,15 @@ public class Game
         foreach (var factory in factories)
             list.Add(factory.CreateEnemy());
         return list;
+    }
+
+    private InputManager BuildInputManager()
+    {
+        var manager = new InputManager();
+        manager.Bind(ConsoleKey.W, new MoveCommand(_player));
+        manager.Bind(ConsoleKey.Spacebar, new AttackCommand(_enemies));
+        manager.Bind(ConsoleKey.H, new HealCommand(_player));
+        return manager;
     }
 
     public void ChangeState(GameState state)
