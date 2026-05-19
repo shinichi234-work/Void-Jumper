@@ -13,6 +13,7 @@ public class Game
     private readonly List<Enemy> _enemies;
     private readonly ConsoleHUD _hud;
     private readonly InputManager _inputManager;
+    private readonly SaveManager _saveManager;
     private GameState _currentState;
 
     public Level Level => _level;
@@ -20,6 +21,7 @@ public class Game
     public List<Enemy> Enemies => _enemies;
     public GameState CurrentState => _currentState;
     public InputManager InputManager => _inputManager;
+    public SaveManager SaveManager => _saveManager;
 
     public Game()
     {
@@ -28,6 +30,7 @@ public class Game
         _enemies = SpawnEnemies();
         _hud = new ConsoleHUD(_player);
         _inputManager = BuildInputManager();
+        _saveManager = new SaveManager();
     }
 
     private Level BuildLevel()

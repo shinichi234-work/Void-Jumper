@@ -16,6 +16,28 @@ public class PlayingState : GameState
             context.InputManager.Undo();
             return;
         }
+        if (key == ConsoleKey.F5)
+        {
+            var data = new SaveData
+            {
+                PlayerHealth = context.Player.Health,
+                PlayerScore = context.Player.Score,
+                LevelName = context.Level.Name
+            };
+            context.SaveManager.Save(data);
+            Console.WriteLine("Game saved.");
+            return;
+        }
+        if (key == ConsoleKey.F9)
+        {
+            var data = context.SaveManager.Load();
+            if (data != null)
+            {
+                context.Player.Health = data.PlayerHealth;
+                context.Player.Score = data.PlayerScore;
+            }
+            return;
+        }
         context.InputManager.Handle(key);
     }
 
@@ -38,6 +60,6 @@ public class PlayingState : GameState
         Console.WriteLine($"Level: {context.Level.Name}  ({context.Level.Width}x{context.Level.Height})");
         Console.WriteLine($"Player: {context.Player.Name}  HP: {context.Player.Health}  Score: {context.Player.Score}");
         Console.WriteLine($"Enemies: {context.Enemies.Count}");
-        Console.WriteLine("\nW - move  Space - attack  H - heal  Z - undo  Esc - pause");
+        Console.WriteLine("\nW - move  Space - attack  H - heal  Z - undo  F5 - save  F9 - load  Esc - pause");
     }
 }
