@@ -7,7 +7,16 @@ public class PlayingState : GameState
     public override void HandleInput(Game context, ConsoleKey key)
     {
         if (key == ConsoleKey.Escape)
+        {
             context.ChangeState(new PauseState());
+            return;
+        }
+        if (key == ConsoleKey.Z)
+        {
+            context.InputManager.Undo();
+            return;
+        }
+        context.InputManager.Handle(key);
     }
 
     public override void Update(Game context)
@@ -29,6 +38,6 @@ public class PlayingState : GameState
         Console.WriteLine($"Level: {context.Level.Name}  ({context.Level.Width}x{context.Level.Height})");
         Console.WriteLine($"Player: {context.Player.Name}  HP: {context.Player.Health}  Score: {context.Player.Score}");
         Console.WriteLine($"Enemies: {context.Enemies.Count}");
-        Console.WriteLine("\nPress Esc to pause");
+        Console.WriteLine("\nW - move  Space - attack  H - heal  Z - undo  Esc - pause");
     }
 }
