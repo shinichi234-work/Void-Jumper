@@ -39,7 +39,7 @@ public class Game
         LoadLevel(0);
     }
 
-    private void LoadLevel(int index)
+    public void LoadLevel(int index)
     {
         LevelIndex = index;
         _map = CreateMap(index);
