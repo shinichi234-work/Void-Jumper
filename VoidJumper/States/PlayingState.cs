@@ -27,7 +27,9 @@ public class PlayingState : GameState
                 PlayerHealth = context.Player.Health,
                 PlayerScore = context.Player.Score,
                 LevelName = context.Level.Name,
-                LevelIndex = context.LevelIndex
+                LevelIndex = context.LevelIndex,
+                PlayerX = context.Player.X,
+                PlayerY = context.Player.Y
             };
             context.SaveManager.Save(data);
             _statusMessage = "Game saved.";
@@ -38,8 +40,11 @@ public class PlayingState : GameState
             var data = context.SaveManager.Load();
             if (data != null)
             {
+                context.LoadLevel(data.LevelIndex);
                 context.Player.Health = data.PlayerHealth;
                 context.Player.Score = data.PlayerScore;
+                context.Player.X = data.PlayerX;
+                context.Player.Y = data.PlayerY;
                 _statusMessage = "Game loaded.";
             }
             else
