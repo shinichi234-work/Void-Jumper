@@ -17,8 +17,18 @@ public class MenuState : GameState
     public override void Draw(Game context)
     {
         Console.Clear();
-        Console.WriteLine("=== Void Jumper ===");
-        Console.WriteLine("Press Enter to start");
-        Console.WriteLine("Press Esc to quit");
+        Console.WriteLine();
+        Console.WriteLine("  +--------------------------------------------------+");
+        Console.WriteLine("  |                                                  |");
+        Console.WriteLine("  |           V O I D   J U M P E R                 |");
+        Console.WriteLine("  |                                                  |");
+        Console.WriteLine("  |         A turn-based dungeon explorer            |");
+        Console.WriteLine("  |                                                  |");
+        Console.WriteLine("  +--------------------------------------------------+");
+        Console.WriteLine();
+        Console.WriteLine("  > Enter  -  Start Game");
+        Console.WriteLine("  > Esc    -  Quit");
+        Console.WriteLine();
+        Console.WriteLine("  Controls: W/A/S/D move  |  Space attack  |  H heal  |  Z undo");
     }
 }

@@ -13,8 +13,5 @@ public class JumpEnemy : Enemy
         Damage = InitialDamage;
     }
 
-    public override void Attack()
-    {
-        Console.WriteLine($"{Name} leaps from above and deals {Damage} damage");
-    }
+    public override void Attack() { }
 }

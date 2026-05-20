@@ -13,8 +13,5 @@ public class PatrolEnemy : Enemy
         Damage = InitialDamage;
     }
 
-    public override void Attack()
-    {
-        Console.WriteLine($"{Name} moves along the platform and hits for {Damage} damage");
-    }
+    public override void Attack() { }
 }
