@@ -15,8 +15,19 @@ public class PauseState : GameState
     public override void Draw(Game context)
     {
         Console.Clear();
-        Console.WriteLine("=== PAUSED ===");
-        Console.WriteLine($"Player HP: {context.Player.Health}");
-        Console.WriteLine("Press Esc to resume");
+        Console.WriteLine();
+        Console.WriteLine("  +--------------------------------------------------+");
+        Console.WriteLine("  |                   P A U S E D                   |");
+        Console.WriteLine("  +--------------------------------------------------+");
+        Console.WriteLine();
+        Console.WriteLine($"  {context.Level.Name}  |  Score: {context.Player.Score}");
+        Console.WriteLine();
+        int hp = context.Player.Health;
+        int maxHp = context.Player.MaxHealth;
+        int filled = maxHp > 0 ? (int)((double)hp / maxHp * 20) : 0;
+        string bar = new string('#', filled) + new string('.', 20 - filled);
+        Console.WriteLine($"  HP [{bar}] {hp}/{maxHp}");
+        Console.WriteLine();
+        Console.WriteLine("  > Esc  -  Resume Game");
     }
 }
