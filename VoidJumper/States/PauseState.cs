@@ -17,7 +17,7 @@ public class PauseState : GameState
         Console.Clear();
         Console.WriteLine();
         Console.WriteLine("  +--------------------------------------------------+");
-        Console.WriteLine("  |                   P A U S E D                   |");
+        Console.WriteLine("  |                   P A U S E D                    |");
         Console.WriteLine("  +--------------------------------------------------+");
         Console.WriteLine();
         Console.WriteLine($"  {context.Level.Name}  |  Score: {context.Player.Score}");

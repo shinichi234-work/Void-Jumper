@@ -17,7 +17,7 @@ public class VictoryState : GameState
         Console.Clear();
         Console.WriteLine();
         Console.WriteLine("  +--------------------------------------------------+");
-        Console.WriteLine("  |                  V I C T O R Y                  |");
+        Console.WriteLine("  |                  V I C T O R Y                   |");
         Console.WriteLine("  +--------------------------------------------------+");
         Console.WriteLine();
         Console.WriteLine($"  You conquered all {Game.TotalLevels} levels of the Void!");

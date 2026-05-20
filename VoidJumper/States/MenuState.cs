@@ -20,7 +20,7 @@ public class MenuState : GameState
         Console.WriteLine();
         Console.WriteLine("  +--------------------------------------------------+");
         Console.WriteLine("  |                                                  |");
-        Console.WriteLine("  |           V O I D   J U M P E R                 |");
+        Console.WriteLine("  |           V O I D   J U M P E R                  |");
         Console.WriteLine("  |                                                  |");
         Console.WriteLine("  |         A turn-based dungeon explorer            |");
         Console.WriteLine("  |                                                  |");
@@ -29,6 +29,6 @@ public class MenuState : GameState
         Console.WriteLine("  > Enter  -  Start Game");
         Console.WriteLine("  > Esc    -  Quit");
         Console.WriteLine();
-        Console.WriteLine("  Controls: W/A/S/D move  |  Space attack  |  H heal  |  Z undo");
+        Console.WriteLine("  Controls: W/A/S/D move  |  Space attack  |  H heal  |  Z undo  |  Esc pause  |  F5 save  |  F9 load");
     }
 }
