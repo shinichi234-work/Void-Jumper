@@ -23,11 +23,20 @@ public class GameOverState : GameState
     public override void Draw(Game context)
     {
         Console.Clear();
-        Console.WriteLine("=== GAME OVER ===");
-        Console.WriteLine($"Score: {context.Player.Score}");
-        Console.WriteLine("\n-- Top Scores --");
-        foreach (var line in _topScores)
-            Console.WriteLine(line);
-        Console.WriteLine("\nPress Enter or Esc to exit");
+        Console.WriteLine();
+        Console.WriteLine("  +--------------------------------------------------+");
+        Console.WriteLine("  |                G A M E   O V E R                |");
+        Console.WriteLine("  +--------------------------------------------------+");
+        Console.WriteLine();
+        Console.WriteLine($"  Score: {context.Player.Score}");
+        Console.WriteLine();
+        if (_topScores.Count > 0)
+        {
+            Console.WriteLine("  -- Top Scores --");
+            foreach (var line in _topScores)
+                Console.WriteLine($"  {line}");
+            Console.WriteLine();
+        }
+        Console.WriteLine("  Press Enter or Esc to exit");
     }
 }
