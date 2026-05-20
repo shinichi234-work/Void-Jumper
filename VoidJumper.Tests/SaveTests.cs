@@ -9,7 +9,7 @@ public class SaveTests
     public void SaveData_Serialize_ShouldPreserveAllFields()
     {
         // Arrange
-        var data = new SaveData { PlayerHealth = 75, PlayerScore = 150, LevelName = "Level 1" };
+        var data = new SaveData { PlayerHealth = 75, PlayerScore = 150, LevelName = "Level 1", LevelIndex = 2, PlayerX = 5, PlayerY = 10 };
 
         // Act
         string json = JsonSerializer.Serialize(data);
@@ -19,6 +19,9 @@ public class SaveTests
         Assert.Equal(data.PlayerHealth, loaded!.PlayerHealth);
         Assert.Equal(data.PlayerScore, loaded.PlayerScore);
         Assert.Equal(data.LevelName, loaded.LevelName);
+        Assert.Equal(data.LevelIndex, loaded.LevelIndex);
+        Assert.Equal(data.PlayerX, loaded.PlayerX);
+        Assert.Equal(data.PlayerY, loaded.PlayerY);
     }
 
     [Fact]
